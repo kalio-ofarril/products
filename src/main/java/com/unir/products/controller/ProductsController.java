@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,69 +19,56 @@ import com.unir.products.service.ProductsService;
 
 import lombok.RequiredArgsConstructor;
 
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
-public class ProductsController
-{
-	
+public class ProductsController {
+
 	private final ProductsService service;
-	
+
+	@CrossOrigin
 	@GetMapping("/products")
-	public ResponseEntity<List<Product>> getProducts()
-	{
-		
+	public ResponseEntity<List<Product>> getProducts() {
+
 		List<Product> products = service.getProducts();
-		
-		if(products != null)
-		{
+
+		if (products != null) {
 			return ResponseEntity.ok(products);
-		} else
-		{
+		} else {
 			return ResponseEntity.ok(Collections.emptyList());
 		}
 	}
-	
+
+	@CrossOrigin
 	@GetMapping("/products/{productId}")
-	public ResponseEntity<Product> getProduct(@PathVariable String productId) 
-	{
+	public ResponseEntity<Product> getProduct(@PathVariable String productId) {
 		Product product = service.getProduct(productId);
-		
-		if (product != null)
-		{
+
+		if (product != null) {
 			return ResponseEntity.ok(product);
-		}
-		else
-		{
+		} else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@DeleteMapping("/products/{productId}")
-	public ResponseEntity<Void> deleteProduct(@PathVariable String productId)
-	{
+	public ResponseEntity<Void> deleteProduct(@PathVariable String productId) {
 		Boolean removed = service.removeProduct(productId);
-		
-		if (Boolean.TRUE.equals(removed))
-		{
+
+		if (Boolean.TRUE.equals(removed)) {
 			return ResponseEntity.ok().build();
-		}
-		else
-		{
+		} else {
 			return ResponseEntity.notFound().build();
 		}
 	}
-	
+
 	@PostMapping("/products")
-	public ResponseEntity<Product> getProduct(@RequestBody CreateProductRequest request)
-	{
+	public ResponseEntity<Product> getProduct(@RequestBody CreateProductRequest request) {
 		Product createdProduct = service.createProduct(request);
-		
-		if(createdProduct != null)
-		{
+
+		if (createdProduct != null) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
-		}
-		else
-		{
+		} else {
 			return ResponseEntity.badRequest().build();
 		}
 	}
