@@ -27,6 +27,13 @@ public class ProductsController {
 	private final ProductsService service;
 
 	@CrossOrigin
+	@GetMapping("/")
+	public String welcome() {
+
+		return "Welcome to Products";
+	}
+
+	@CrossOrigin
 	@GetMapping("/products")
 	public ResponseEntity<List<Product>> getProducts() {
 
