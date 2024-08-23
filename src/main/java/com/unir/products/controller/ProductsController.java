@@ -32,6 +32,8 @@ public class ProductsController {
 
 		List<Product> products = service.getProducts();
 
+		System.out.println(products);
+
 		if (products != null) {
 			return ResponseEntity.ok(products);
 		} else {
@@ -64,7 +66,12 @@ public class ProductsController {
 
 	@PostMapping("/products")
 	public ResponseEntity<Product> getProduct(@RequestBody CreateProductRequest request) {
+
+		System.out.println(request);
+
 		Product createdProduct = service.createProduct(request);
+
+		System.out.println(createdProduct);
 
 		if (createdProduct != null) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
