@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateProductRequest
-{
+public class CreateProductRequest {
 	private String name;
-	private String country;
+	private String precio;
 	private String description;
+	private String imagen;
 	private boolean visible;
 }

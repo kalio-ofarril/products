@@ -39,8 +39,6 @@ public class ProductsController {
 
 		List<Product> products = service.getProducts();
 
-		System.out.println(products);
-
 		if (products != null) {
 			return ResponseEntity.ok(products);
 		} else {
@@ -60,6 +58,7 @@ public class ProductsController {
 		}
 	}
 
+	@CrossOrigin
 	@DeleteMapping("/products/{productId}")
 	public ResponseEntity<Void> deleteProduct(@PathVariable String productId) {
 		Boolean removed = service.removeProduct(productId);
@@ -71,6 +70,7 @@ public class ProductsController {
 		}
 	}
 
+	@CrossOrigin
 	@PostMapping("/products")
 	public ResponseEntity<Product> getProduct(@RequestBody CreateProductRequest request) {
 

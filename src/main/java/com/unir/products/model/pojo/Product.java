@@ -21,21 +21,23 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @ToString
-public class Product
-{
+public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Column(name = "name", unique = true)
 	private String name;
-	
-	@Column(name = "country")
-	private String country;
-	
+
+	@Column(name = "precio")
+	private String precio;
+
 	@Column(name = "description")
 	private String description;
-	
+
+	@Column(name = "imagen")
+	private String imagen;
+
 	@Column(name = "visible")
 	private Boolean visible;
 }
