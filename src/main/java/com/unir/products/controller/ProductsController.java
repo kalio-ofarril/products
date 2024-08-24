@@ -70,15 +70,11 @@ public class ProductsController {
 		}
 	}
 
-	@CrossOrigin
+	@CrossOrigin(origins = "https://react-tienda-online-ten.vercel.app")
 	@PostMapping("/products")
 	public ResponseEntity<Product> getProduct(@RequestBody CreateProductRequest request) {
 
-		System.out.println(request);
-
 		Product createdProduct = service.createProduct(request);
-
-		System.out.println(createdProduct);
 
 		if (createdProduct != null) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
