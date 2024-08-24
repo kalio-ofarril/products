@@ -11,36 +11,30 @@ import com.unir.products.model.pojo.Product;
 import com.unir.products.model.request.CreateProductRequest;
 
 @Service
-public class ProductServiceImpl implements ProductsService
-{
+public class ProductServiceImpl implements ProductsService {
 	@Autowired
 	private ProductRepository repository;
-	
+
 	@Override
-	public List<Product> getProducts()
-	{
+	public List<Product> getProducts() {
 		List<Product> products = repository.findAll();
 		return products.isEmpty() ? null : products;
 	}
-	
+
 	@Override
-	public Product getProduct(String productId)
-	{
+	public Product getProduct(String productId) {
 		return repository.findById(Long.valueOf(productId)).orElse(null);
 	}
-	
+
 	@Override
-	public Product createProduct(CreateProductRequest request)
-	{
-		if(request != null && StringUtils.hasLength(request.getName().trim())
+	public Product createProduct(CreateProductRequest request) {
+		if (request != null && StringUtils.hasLength(request.getName().trim())
 				&& StringUtils.hasLength(request.getDescription().trim())
-				&& StringUtils.hasLength(request.getCountry().trim()) && request.isVisible())
-				{
-					Product product = Product.builder().name(request.getName()).description(request.getDescription()).country(request.getCountry()).visible(request.isVisible()).build();
-					return repository.save(product);
-				}
-		else
-		{
+				&& StringUtils.hasLength(request.getPrecio().trim()) && request.isVisible()) {
+			Product product = Product.builder().name(request.getName()).description(request.getDescription())
+					.precio(request.getPrecio()).visible(request.isVisible()).build();
+			return repository.save(product);
+		} else {
 			return null;
 		}
 	}
@@ -48,14 +42,11 @@ public class ProductServiceImpl implements ProductsService
 	@Override
 	public Boolean removeProduct(String productId) {
 		Product product = repository.findById(Long.valueOf(productId)).orElse(null);
-		
-		if(product != null)
-		{
+
+		if (product != null) {
 			repository.delete(product);
 			return Boolean.TRUE;
-		}
-		else
-		{
+		} else {
 			return Boolean.FALSE;
 		}
 	}
