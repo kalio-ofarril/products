@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductsService {
 				&& StringUtils.hasLength(request.getDescription().trim())
 				&& StringUtils.hasLength(request.getPrecio().trim()) && request.isVisible()) {
 			Product product = Product.builder().name(request.getName()).description(request.getDescription())
-					.precio(request.getPrecio()).visible(request.isVisible()).build();
+					.precio(request.getPrecio()).visible(request.isVisible()).imagen(request.getImagen()).build();
 			return repository.save(product);
 		} else {
 			return null;
