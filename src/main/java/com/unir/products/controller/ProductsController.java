@@ -3,6 +3,7 @@ package com.unir.products.controller;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.unir.products.model.pojo.Product;
 import com.unir.products.model.request.CreateProductRequest;
-import com.unir.products.service.ProductsService;
+import com.unir.products.service.ProductServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +25,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductsController {
 
-	private final ProductsService service;
+	@Autowired
+	private final ProductServiceImpl service;
 
 	@CrossOrigin
 	@GetMapping("/")
